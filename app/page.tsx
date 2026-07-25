@@ -5,7 +5,7 @@ import { NavBar, PageHeader, SiteFooter } from "@/shared/layout";
 
 export default function Home() {
   return (
-    <div className="min-h-screen lg:h-screen lg:max-h-screen flex flex-col justify-between overflow-y-auto lg:overflow-hidden bg-cream-light font-sans text-navy">
+    <div className="flex h-screen max-h-screen flex-col justify-between overflow-hidden bg-cream-light font-sans text-navy">
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:bg-navy focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-cream"
@@ -15,28 +15,25 @@ export default function Home() {
 
       <NavBar />
 
-      <div className="flex flex-1 flex-col justify-start lg:justify-center min-h-0 py-2">
+      <div className="flex flex-1 flex-col justify-center min-h-0 py-2">
         <PageHeader />
 
         <main
           id="main"
-          className="mx-auto flex min-h-0 w-full max-w-[1400px] flex-col gap-6 px-4 sm:px-6 md:grid md:grid-cols-2 lg:flex lg:flex-row lg:items-start lg:justify-between lg:gap-8 lg:px-8 py-2"
+          className="mx-auto flex min-h-0 w-full max-w-[1400px] items-start justify-between gap-8 px-8"
         >
-          {/* Cart Table Column */}
-          <div className="w-full md:col-span-1 lg:w-[390px] shrink-0">
+          <div className="w-[390px] shrink-0">
             <CartTable />
           </div>
 
-          {/* Visualizer & Palette Section (Middle on Desktop, Top on Tablet, Collapsible/Embedded on Mobile) */}
-          <div className="w-full min-w-0 md:col-span-2 lg:col-span-1 lg:flex-1 order-last md:order-first lg:order-none">
-            <section className="flex flex-col sm:flex-row items-stretch overflow-hidden rounded-md border-2 border-navy bg-cream shadow-sm">
+          <div className="min-w-0 flex-1">
+            <section className="flex items-stretch overflow-hidden rounded-md border-2 border-navy">
               <DesignVisualizer />
               <DesignPalette />
             </section>
           </div>
 
-          {/* Order Summary & Customer Details Column */}
-          <div className="w-full md:col-span-1 lg:w-[330px] shrink-0">
+          <div className="w-[320px] shrink-0">
             <OrderSummary />
           </div>
         </main>

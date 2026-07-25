@@ -83,153 +83,111 @@ function PaymentMethodRadioButton({
 
 export function OrderSummary() {
   return (
-    <section className="space-y-3.5">
-      {/* Customer Info Form */}
-      <div className="rounded-sm border-2 border-navy bg-cream p-3 space-y-2">
-        <OrderSummarySectionHeader title="CUSTOMER DETAILS" />
-        <div className="mt-2 space-y-2">
-          <CustomerInputField id="customer-name" label="CUSTOMER NAME:" />
-          <div className="flex flex-col sm:flex-row gap-2 sm:gap-4">
-            <CustomerInputField id="phone" label="PHONE:" />
-            <CustomerInputField id="email" label="EMAIL:" />
-          </div>
-          <CustomerInputField id="shipping-address" label="SHIPPING ADDRESS:" />
-        </div>
-      </div>
+    <section className="space-y-2.5">
+      <OrderSummarySectionHeader title="ORDER SUMMARY" />
 
-      {/* Payment Selection Grid */}
-      <div className="space-y-2">
-        <h2 className="inline-block rounded-sm border-2 border-navy bg-cream px-3 py-0.5 font-display text-sm sm:text-base">
-          SELECT PAYMENT METHOD:
-        </h2>
-
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-          {/* Credit / Debit Card */}
-          <label className="group flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-navy bg-cream p-2 transition hover:bg-tan/40">
-            <div className="flex w-full items-center justify-between">
-              <input
-                type="radio"
-                name="payment-method"
-                value="card"
-                defaultChecked
-                className="peer sr-only"
-              />
-              <span className="flex size-3.5 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-navy">
-                <span className="size-1.5 rounded-full bg-navy group-has-checked:block hidden" />
-              </span>
-              <VisaLogo className="h-3 w-auto" />
-            </div>
-            <div className="mt-2 text-center">
-              <p className="text-[9px] font-bold leading-tight">CREDIT/DEBIT CARD</p>
-            </div>
-          </label>
-
-          {/* PayPal */}
-          <label className="group flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-navy bg-cream p-2 transition hover:bg-tan/40">
-            <div className="flex w-full items-center justify-between">
-              <input
-                type="radio"
-                name="payment-method"
-                value="paypal"
-                className="peer sr-only"
-              />
-              <span className="flex size-3.5 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-navy">
-                <span className="size-1.5 rounded-full bg-navy group-has-checked:block hidden" />
-              </span>
-            </div>
-            <div className="mt-1 flex flex-col items-center">
-              <PayPalLogo className="h-4 w-auto" />
-              <p className="mt-1 text-[9px] font-bold leading-tight">PAYPAL</p>
-            </div>
-          </label>
-
-          {/* Apple Pay */}
-          <label className="group flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-navy bg-cream p-2 transition hover:bg-tan/40">
-            <div className="flex w-full items-center justify-between">
-              <input
-                type="radio"
-                name="payment-method"
-                value="applepay"
-                className="peer sr-only"
-              />
-              <span className="flex size-3.5 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-navy">
-                <span className="size-1.5 rounded-full bg-navy group-has-checked:block hidden" />
-              </span>
-            </div>
-            <div className="mt-1 flex flex-col items-center">
-              <ApplePayLogo className="h-4 w-auto text-black" />
-              <p className="mt-1 text-[9px] font-bold leading-tight">APPLE PAY</p>
-            </div>
-          </label>
-
-          {/* Bank Transfer */}
-          <label className="group flex cursor-pointer flex-col items-center justify-between rounded-md border-2 border-navy bg-cream p-2 transition hover:bg-tan/40">
-            <div className="flex w-full items-center justify-between">
-              <input
-                type="radio"
-                name="payment-method"
-                value="bank"
-                className="peer sr-only"
-              />
-              <span className="flex size-3.5 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-navy">
-                <span className="size-1.5 rounded-full bg-navy group-has-checked:block hidden" />
-              </span>
-            </div>
-            <div className="mt-1 flex flex-col items-center">
-              <BankIcon className="size-4" />
-              <p className="mt-1 text-[9px] font-bold leading-tight">BANK TRANSFER</p>
-            </div>
-          </label>
-        </div>
-
-        {/* Card Details Box */}
-        <div className="rounded-md border-2 border-navy bg-cream p-2.5 space-y-2">
-          <div className="flex items-center justify-between">
-            <span className="text-[10px] font-bold">CARD INFORMATION</span>
-            <div className="flex gap-1.5">
-              <VisaLogo className="h-3.5 w-auto" />
-              <MastercardLogo className="h-3.5 w-auto" />
-            </div>
-          </div>
-          <input
-            id="card-number"
-            name="card-number"
-            readOnly
-            defaultValue="1234 4566 7723 8990"
-            autoComplete="off"
-            className="w-full rounded-sm border border-navy bg-white/80 px-2 py-1 text-xs font-bold tracking-wider tabular-nums focus-visible:outline-2 focus-visible:outline-navy"
-          />
-          <div className="flex gap-2">
-            <input
-              aria-label="Expiration date"
-              name="expiration"
-              readOnly
-              placeholder="EXPIRATION (MM/YY)"
-              autoComplete="off"
-              className="min-w-0 flex-1 rounded-sm border border-navy bg-white/80 px-2 py-1 text-[10px] font-bold placeholder:text-navy/60 focus-visible:outline-2 focus-visible:outline-navy"
-            />
-            <input
-              aria-label="CVV"
-              name="cvv"
-              readOnly
-              placeholder="CVV"
-              autoComplete="off"
-              className="min-w-0 flex-1 rounded-sm border border-navy bg-white/80 px-2 py-1 text-[10px] font-bold placeholder:text-navy/60 focus-visible:outline-2 focus-visible:outline-navy"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Project Name / Notes */}
       <div className="space-y-1.5">
-        <CustomerInputField id="project-notes-1" label="PROJECT NAME / NOTES:" />
-        <div className="border-b border-navy h-4 w-full" />
+        <CustomerInputField id="customer-name" label="CUSTOMER NAME:" />
+        <div className="flex gap-3">
+          <CustomerInputField id="phone" label="PHONE:" />
+          <CustomerInputField id="email" label="EMAIL:" />
+        </div>
+        <CustomerInputField id="shipping-address" label="SHIPPING ADDRESS:" />
+        <CustomerInputField id="project-notes" label="PROJECT NOTES:" />
       </div>
 
-      {/* Order Button */}
+      <div className="space-y-1 pt-0.5">
+        <OrderSummaryTotalRow label="SUBTOTAL:" value={ORDER_TOTALS.SUBTOTAL} />
+        <OrderSummaryTotalRow label="SHIPPING:" value={ORDER_TOTALS.SHIPPING} />
+        <OrderSummaryTotalRow
+          label="GRAND TOTAL:"
+          value={ORDER_TOTALS.GRAND_TOTAL}
+        />
+      </div>
+
+      <h2 className="inline-block rounded-sm border-2 border-navy bg-cream px-3 py-0.5 font-display text-base">
+        SELECT PAYMENT METHOD:
+      </h2>
+
+      <div className="flex items-center justify-between">
+        <PaymentMethodRadioButton
+          group="payment-method"
+          label="Credit or debit card"
+          defaultChecked
+        >
+          <span className="text-[11px] font-bold">CREDIT/DEBIT CARD</span>
+        </PaymentMethodRadioButton>
+        <PaymentMethodRadioButton group="payment-method" label="PayPal">
+          <PayPalLogo className="h-3.5 w-auto" />
+        </PaymentMethodRadioButton>
+      </div>
+
+      <div className="rounded-md border-2 border-navy bg-cream p-2">
+        <div className="flex items-center gap-2">
+          <PaymentMethodRadioButton group="card-brand" label="Visa" defaultChecked />
+          <VisaLogo className="h-3.5 w-auto" />
+          <MastercardLogo className="h-3.5 w-auto" />
+        </div>
+        <label
+          htmlFor="card-number"
+          className="mt-1 block text-[9px] font-bold"
+        >
+          CARD NUMBER
+        </label>
+        <input
+          id="card-number"
+          name="card-number"
+          readOnly
+          defaultValue="1234 4566 7723 8990"
+          autoComplete="off"
+          className="mt-0.5 w-full rounded-sm border border-navy bg-white/70 px-2 py-1 text-xs font-bold tracking-wider tabular-nums focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-navy"
+        />
+        <div className="mt-1 flex gap-2">
+          <input
+            aria-label="Expiration date"
+            name="expiration"
+            readOnly
+            placeholder="EXPIRATION /"
+            autoComplete="off"
+            className="min-w-0 flex-1 rounded-sm border border-navy bg-white/70 px-2 py-1 text-[10px] font-bold placeholder:text-navy/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-navy"
+          />
+          <input
+            aria-label="CVV"
+            name="cvv"
+            readOnly
+            placeholder="CVV"
+            autoComplete="off"
+            className="min-w-0 flex-1 rounded-sm border border-navy bg-white/70 px-2 py-1 text-[10px] font-bold placeholder:text-navy/70 focus-visible:outline-2 focus-visible:outline-offset-1 focus-visible:outline-navy"
+          />
+        </div>
+      </div>
+
+      <div className="flex gap-2">
+        <div className="relative flex-1 rounded-md border-2 border-navy bg-cream-light/50 p-2">
+          <span className="absolute left-2 top-2">
+            <PaymentMethodRadioButton group="payment-method" label="Apple Pay" />
+          </span>
+          <div className="flex justify-center pt-0.5">
+            <ApplePayLogo className="h-6 w-auto text-black" />
+          </div>
+          <p className="mt-1 text-center text-[9px] font-bold">APPLE PAY</p>
+        </div>
+        <div className="relative flex-1 rounded-md border-2 border-navy bg-cream-light/50 p-2">
+          <span className="absolute left-2 top-2">
+            <PaymentMethodRadioButton group="payment-method" label="Bank transfer" />
+          </span>
+          <div className="flex justify-center pt-0.5">
+            <BankIcon className="size-6" />
+          </div>
+          <p className="mt-1 text-center text-[9px] font-bold">
+            BANK TRANSFER
+          </p>
+        </div>
+      </div>
+
       <button
         type="button"
-        className="w-full rounded-md border-2 border-navy bg-navy py-2.5 font-display text-xs tracking-widest text-cream transition-colors hover:bg-terracotta-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
+        className="w-full rounded-md bg-navy py-2 font-display text-xs tracking-widest text-cream transition-colors hover:bg-terracotta-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
       >
         PLACE SECURE ORDER
       </button>
