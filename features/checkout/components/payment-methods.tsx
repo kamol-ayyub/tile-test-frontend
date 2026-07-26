@@ -6,96 +6,11 @@ import {
   VisaLogo,
 } from "@/shared/components/brand-icons";
 import { ORDER_TOTALS } from "@/shared/data";
+import { OrderSummaryTotalRow, PaymentMethodRadioButton } from "./checkout-ui";
 
-function OrderSummarySectionHeader({ title }: { title: string }) {
+export function PaymentMethods() {
   return (
-    <div className="flex items-end  bg-cream">
-      <h2 className="border-2 border-b-0 border-navy bg-cream px-3 py-0.5 font-display text-base whitespace-nowrap">
-        {title}
-      </h2>
-      <div className="h-full flex-1 border-b-2 border-navy" />
-    </div>
-  );
-}
-
-function CustomerInputField({ id, label }: { id: string; label: string }) {
-  return (
-    <div className="flex min-w-0 flex-1 items-end gap-1.5">
-      <label htmlFor={id} className="shrink-0 text-[10px] font-bold">
-        {label}
-      </label>
-      <input
-        id={id}
-        name={id}
-        readOnly
-        autoComplete="off"
-        className="mb-0.5 h-3.5 min-w-0 flex-1 border-b border-navy bg-transparent focus-visible:border-b-2 focus-visible:outline-none"
-      />
-    </div>
-  );
-}
-
-function OrderSummaryTotalRow({
-  label,
-  value,
-}: {
-  label: string;
-  value: string;
-}) {
-  return (
-    <div className="flex items-center justify-end gap-2">
-      <span className="text-[10px] font-bold">{label}</span>
-      <span className="min-w-10 px-2 py-0.5 text-right text-xs font-bold whitespace-nowrap tabular-nums">
-        [ {value} ]
-      </span>
-    </div>
-  );
-}
-
-function PaymentMethodRadioButton({
-  group,
-  label,
-  defaultChecked,
-  children,
-}: {
-  group: string;
-  label: string;
-  defaultChecked?: boolean;
-  children?: React.ReactNode;
-}) {
-  return (
-    <label className="group flex cursor-pointer items-center gap-2">
-      <input
-        type="radio"
-        name={group}
-        value={label}
-        defaultChecked={defaultChecked}
-        aria-label={label}
-        className="peer sr-only"
-      />
-      <span className="flex size-3.5 shrink-0 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy">
-        <span className="hidden size-1.5 rounded-full bg-navy group-has-checked:block" />
-      </span>
-      {children}
-    </label>
-  );
-}
-
-export function OrderSummary() {
-  return (
-    <section className="space-y-2.5">
-      <OrderSummarySectionHeader title="ORDER SUMMARY" />
-
-      <div className="space-y-1.5">
-        <CustomerInputField id="customer-name" label="CUSTOMER NAME:" />
-        <div className="flex gap-3">
-          <CustomerInputField id="phone" label="PHONE:" />
-          <CustomerInputField id="email" label="EMAIL:" />
-        </div>
-        <CustomerInputField id="shipping-address" label="SHIPPING ADDRESS:" />
-        <CustomerInputField id="project-notes" label="PROJECT NOTES:" />
-      </div>
-
+    <section className="space-y-2.5 md:mt-2.5 max-md:order-4">
       <div className="space-y-1 pt-0.5">
         <OrderSummaryTotalRow label="SUBTOTAL:" value={ORDER_TOTALS.SUBTOTAL} />
         <OrderSummaryTotalRow label="SHIPPING:" value={ORDER_TOTALS.SHIPPING} />
@@ -184,13 +99,6 @@ export function OrderSummary() {
           </p>
         </div>
       </div>
-
-      <button
-        type="button"
-        className="w-full rounded-md bg-navy py-2 font-display text-xs tracking-widest text-cream transition-colors hover:bg-terracotta-dark focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy"
-      >
-        PLACE SECURE ORDER
-      </button>
     </section>
   );
 }

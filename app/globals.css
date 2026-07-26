@@ -1,6 +1,9 @@
 @import 'tailwindcss';
 
 @theme {
+  /* Extra small phones: below this, decorative header swatches drop off */
+  --breakpoint-xs: 22.5rem;
+
   --font-sans: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-archivo-black), 'Arial Black', sans-serif;
 
@@ -15,4 +18,12 @@
   --color-ochre: #b8933d;
   --color-leaf: #4a6b3e;
   --color-teal: #5e8c7b;
+}
+
+@utility scrollbar-none {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }

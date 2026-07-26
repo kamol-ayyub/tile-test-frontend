@@ -4,7 +4,7 @@ const GRID_CELL_COUNT = GRID_SIZE * GRID_SIZE;
 
 export function DesignVisualizer() {
   return (
-    <div className="flex min-w-0 flex-1 flex-col bg-cream">
+    <div className="flex min-w-0 flex-1 flex-col bg-cream max-md:flex-none">
       <div className="p-3 pb-2 text-center">
         <h2 className="font-display text-lg">
           VISUALIZE YOUR ORDER:
@@ -14,7 +14,7 @@ export function DesignVisualizer() {
         </p>
       </div>
 
-      <div className="w-full flex-1">
+      <div className="w-full flex-1 max-md:flex-none">
         <div
           className="grid w-full border-t border-navy/40"
           style={{

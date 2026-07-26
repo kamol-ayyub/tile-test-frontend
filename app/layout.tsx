@@ -31,9 +31,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${archivo.variable} ${archivoBlack.variable} h-full antialiased`}
+      className={`${archivo.variable} ${archivoBlack.variable} antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="flex min-h-screen flex-col">{children}</body>
     </html>
   );
 }
