@@ -1,37 +1,37 @@
-import { HEADER_SWATCHES_LEFT, HEADER_SWATCHES_RIGHT } from "@/shared/data";
-import { KilnIllustration, TempleIllustration } from "./header-illustrations";
-import { TILE_ICONS, type TileName } from "@/shared/components/tile-icons";
+import { HEADER_SWATCHES_LEFT, HEADER_SWATCHES_RIGHT } from '@/shared/data';
+import { KilnIllustration, TempleIllustration } from './header-illustrations';
+import { TILE_ICONS, type TileName } from '@/shared/components/tile-icons';
 
 function Swatch({ name }: { name: TileName }) {
   const Icon = TILE_ICONS[name];
-  return <Icon className="size-5 max-md:size-4.5 border border-navy" />;
+  return <Icon className='size-5 max-md:size-4.5 border border-navy' />;
 }
 
 export function PageHeader() {
   return (
-    <section className="mx-auto flex shrink-0 max-w-350 items-center justify-center gap-8 px-8 py-2 max-xl:gap-4 max-xl:px-4">
-      <TempleIllustration className="h-14 w-auto shrink-0 md:max-xl:h-10 max-md:hidden" />
-      <div className="text-center">
-        <h1 className="font-display text-3xl leading-none tracking-tight md:max-xl:text-2xl max-md:text-[clamp(1rem,5.1vw,1.25rem)]">
+    <section className='mx-auto flex shrink-0 max-w-350 items-center justify-center gap-8 px-8 py-2 max-xl:gap-4 max-xl:px-4'>
+      <TempleIllustration className='h-14 w-auto shrink-0 md:max-xl:h-10 max-md:hidden' />
+      <div className='text-center'>
+        <h1 className='font-display text-3xl leading-none tracking-tight md:max-xl:text-2xl max-md:text-[clamp(1rem,5.1vw,1.25rem)]'>
           CERAMIC TILE ORDER FORM
         </h1>
-        <div className="mt-1 flex items-center justify-center gap-3">
-          <span className="flex gap-1 max-xs:hidden">
+        <div className='mt-1 flex items-center justify-center gap-3'>
+          <span className='flex gap-1 max-xs:hidden'>
             {HEADER_SWATCHES_LEFT.map((name) => (
               <Swatch key={name} name={name} />
             ))}
           </span>
-          <p className="font-display text-xl tracking-wide md:max-xl:text-lg max-md:text-[clamp(0.72rem,3.4vw,1rem)]">
+          <p className='font-display text-xl tracking-wide md:max-xl:text-lg max-md:text-[clamp(0.72rem,3.4vw,1rem)]'>
             THE ARTISAN KILN
           </p>
-          <span className="flex gap-1 max-xs:hidden">
+          <span className='flex gap-1 max-xs:hidden'>
             {HEADER_SWATCHES_RIGHT.map((name) => (
               <Swatch key={name} name={name} />
             ))}
           </span>
         </div>
       </div>
-      <KilnIllustration className="h-14 w-auto shrink-0 md:max-xl:h-10 max-md:hidden" />
+      <KilnIllustration className='h-14 w-auto shrink-0 md:max-xl:h-10 max-md:hidden' />
     </section>
   );
 }

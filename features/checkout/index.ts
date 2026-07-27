@@ -1,3 +1,4 @@
+export { CheckoutForm } from "./components/checkout-form";
 export { CustomerDetails } from "./components/customer-details";
 export { ProjectNotes } from "./components/project-notes";
 export { PaymentMethods } from "./components/payment-methods";
