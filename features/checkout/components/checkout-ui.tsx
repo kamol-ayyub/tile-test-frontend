@@ -121,7 +121,7 @@ export function PaymentMethodCard({
         className='peer sr-only'
       />
       <span className='absolute left-2 top-2 flex size-3.5 shrink-0 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy'>
-        <span className='hidden size-1.5 rounded-full bg-navy peer-checked:block' />
+        <span className='hidden size-1.5 rounded-full bg-navy group-has-checked:block' />
       </span>
       {children}
     </label>
