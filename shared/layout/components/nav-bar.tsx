@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppSelector } from '@/app/hooks';
 import { CartIcon, UserIcon } from '@/shared/components/brand-icons';
 import { NAV_LINKS } from '@/shared/data';
@@ -33,14 +34,25 @@ export function NavBar() {
         <div className='flex w-36 shrink-0 items-center justify-end gap-3 max-md:w-auto max-md:gap-2'>
           <span className='relative' role='img' aria-label={cartLabel}>
             <CartIcon className='size-5' />
-            {itemCount > 0 && (
-              <span
-                aria-hidden='true'
-                className='absolute -right-1.5 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta-dark px-0.5 text-[9px] font-bold text-cream'
-              >
-                {itemCount}
-              </span>
-            )}
+            <AnimatePresence mode='popLayout'>
+              {itemCount > 0 && (
+                <motion.span
+                  key={itemCount}
+                  initial={{ scale: 0.5, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  exit={{ scale: 0.5, opacity: 0 }}
+                  transition={{
+                    type: 'spring',
+                    stiffness: 500,
+                    damping: 25,
+                  }}
+                  aria-hidden='true'
+                  className='absolute -right-1.5 -top-1.5 flex h-3.5 min-w-3.5 items-center justify-center rounded-full bg-terracotta-dark px-0.5 text-[9px] font-bold text-cream'
+                >
+                  {itemCount}
+                </motion.span>
+              )}
+            </AnimatePresence>
           </span>
           <UserIcon className='size-5' />
           <span className='rounded-full bg-navy px-3 py-1 text-xs font-bold text-cream'>

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { DragEvent, KeyboardEvent } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import { useAppDispatch, useAppSelector } from "@/app/hooks";
 import { TILE_ICONS } from "@/shared/components/tile-icons";
 import { GRID_SIZE } from "@/shared/data";
@@ -162,7 +163,24 @@ export function DesignVisualizer() {
                   isActive ? "ring-2 ring-inset ring-navy/60" : ""
                 } ${isDragTarget ? "bg-tan" : ""}`}
               >
-                {Icon && <Icon className="size-full" />}
+                <AnimatePresence initial={false} mode="popLayout">
+                  {Icon && (
+                    <motion.span
+                      key={tileName}
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.5 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 400,
+                        damping: 20,
+                      }}
+                      className="block size-full"
+                    >
+                      <Icon className="size-full" />
+                    </motion.span>
+                  )}
+                </AnimatePresence>
               </button>
             );
           })}

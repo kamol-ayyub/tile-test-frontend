@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { PlusIcon } from '@/shared/components/brand-icons';
 import { TILE_ICONS } from '@/shared/components/tile-icons';
@@ -132,59 +133,65 @@ export function AddTilePicker() {
         </span>
       </button>
 
-      {isOpen && (
-        <ul
-          ref={listboxRef}
-          id={listboxId}
-          role='listbox'
-          aria-label='Tiles available to add'
-          tabIndex={-1}
-          aria-activedescendant={
-            availableTiles.length > 0 ? optionId(activeIndex) : undefined
-          }
-          onKeyDown={handleListboxKeyDown}
-          className='absolute left-0 top-full z-20 mt-1 max-h-72 w-60 overflow-y-auto border-2 border-navy bg-cream py-1 shadow-[4px_4px_0_0_var(--color-navy)] focus:outline-none'
-        >
-          {availableTiles.length === 0 && (
-            <li
-              role='option'
-              aria-disabled='true'
-              aria-selected={false}
-              className='px-3 py-2 text-[10px] font-bold'
-            >
-              ALL TILES ARE ALREADY IN YOUR CART
-            </li>
-          )}
-          {availableTiles.map((tile, index) => {
-            const Icon = TILE_ICONS[tile.icon];
-            const isActive = index === activeIndex;
-            return (
-              <li key={tile.id} role='presentation'>
-                <button
-                  type='button'
-                  role='option'
-                  id={optionId(index)}
-                  aria-selected={isActive}
-                  tabIndex={-1}
-                  onClick={() => selectTile(tile.id)}
-                  onMouseEnter={() => setActiveIndex(index)}
-                  className={`flex w-full cursor-pointer selectedCartItems-center gap-2 px-2 py-1.5 text-left ${
-                    isActive ? 'bg-tan' : ''
-                  }`}
-                >
-                  <Icon className='size-8 shrink-0 rounded-sm border border-navy' />
-                  <span className='text-[10px] font-bold leading-tight'>
-                    {tile.name}
-                  </span>
-                  <span className='ml-auto text-[10px] font-bold tabular-nums'>
-                    ${tile.unitPrice.toFixed(2)}
-                  </span>
-                </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.ul
+            ref={listboxRef}
+            id={listboxId}
+            role='listbox'
+            aria-label='Tiles available to add'
+            tabIndex={-1}
+            aria-activedescendant={
+              availableTiles.length > 0 ? optionId(activeIndex) : undefined
+            }
+            onKeyDown={handleListboxKeyDown}
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15, ease: 'easeOut' }}
+            className='absolute left-0 top-full z-20 mt-1 max-h-72 w-60 overflow-y-auto border-2 border-navy bg-cream py-1 shadow-[4px_4px_0_0_var(--color-navy)] focus:outline-none'
+          >
+            {availableTiles.length === 0 && (
+              <li
+                role='option'
+                aria-disabled='true'
+                aria-selected={false}
+                className='px-3 py-2 text-[10px] font-bold'
+              >
+                ALL TILES ARE ALREADY IN YOUR CART
               </li>
-            );
-          })}
-        </ul>
-      )}
+            )}
+            {availableTiles.map((tile, index) => {
+              const Icon = TILE_ICONS[tile.icon];
+              const isActive = index === activeIndex;
+              return (
+                <li key={tile.id} role='presentation'>
+                  <button
+                    type='button'
+                    role='option'
+                    id={optionId(index)}
+                    aria-selected={isActive}
+                    tabIndex={-1}
+                    onClick={() => selectTile(tile.id)}
+                    onMouseEnter={() => setActiveIndex(index)}
+                    className={`flex w-full cursor-pointer selectedCartItems-center gap-2 px-2 py-1.5 text-left ${
+                      isActive ? 'bg-tan' : ''
+                    }`}
+                  >
+                    <Icon className='size-8 shrink-0 rounded-sm border border-navy' />
+                    <span className='text-[10px] font-bold leading-tight'>
+                      {tile.name}
+                    </span>
+                    <span className='ml-auto text-[10px] font-bold tabular-nums'>
+                      ${tile.unitPrice.toFixed(2)}
+                    </span>
+                  </button>
+                </li>
+              );
+            })}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

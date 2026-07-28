@@ -1,6 +1,7 @@
 'use client';
 
 import type { DragEvent } from 'react';
+import { motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { PALETTE_TILES } from '@/shared/data';
 import { TILE_ICONS } from '@/shared/components/tile-icons';
@@ -34,22 +35,28 @@ export function DesignPalette() {
           const Icon = TILE_ICONS[name];
           const isSelected = name === selectedTile;
           return (
-            <button
+            <motion.span
               key={name}
-              type='button'
-              draggable
-              aria-pressed={isSelected}
-              aria-label={`${isSelected ? 'Deselect' : 'Select'} ${name} tile`}
-              onClick={() => handleTileClick(name)}
-              onDragStart={(event) => handleDragStart(event, name)}
-              className={`block cursor-grab overflow-hidden rounded-sm border-2 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy active:cursor-grabbing ${
-                isSelected
-                  ? 'border-navy ring-2 ring-navy ring-offset-1'
-                  : 'border-navy hover:brightness-90'
-              }`}
+              whileTap={{ scale: 0.94 }}
+              transition={{ duration: 0.1 }}
+              className='block'
             >
-              <Icon className='block size-full' />
-            </button>
+              <button
+                type='button'
+                draggable
+                aria-pressed={isSelected}
+                aria-label={`${isSelected ? 'Deselect' : 'Select'} ${name} tile`}
+                onClick={() => handleTileClick(name)}
+                onDragStart={(event) => handleDragStart(event, name)}
+                className={`block w-full cursor-grab overflow-hidden rounded-sm border-2 transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy active:cursor-grabbing ${
+                  isSelected
+                    ? 'border-navy ring-2 ring-navy ring-offset-1'
+                    : 'border-navy hover:brightness-90'
+                }`}
+              >
+                <Icon className='block size-full' />
+              </button>
+            </motion.span>
           );
         })}
       </div>

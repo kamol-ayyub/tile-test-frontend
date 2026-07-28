@@ -1,6 +1,7 @@
 'use client';
 
 import { Provider } from 'react-redux';
+import { MotionConfig } from 'framer-motion';
 import { store } from './store';
 
 export function Providers({
@@ -8,5 +9,9 @@ export function Providers({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      <MotionConfig reducedMotion="user">{children}</MotionConfig>
+    </Provider>
+  );
 }

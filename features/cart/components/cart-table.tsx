@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useAppDispatch, useAppSelector } from '@/app/hooks';
 import { PlusIcon, TrashIcon } from '@/shared/components/brand-icons';
 import { TILE_ICONS } from '@/shared/components/tile-icons';
@@ -79,64 +80,73 @@ export function CartTable() {
                 </td>
               </tr>
             )}
-            {lines.map((item) => {
-              const Icon = TILE_ICONS[item.icon];
-              return (
-                <tr key={item.id}>
-                  <td className='border border-navy p-1.5 max-md:p-1'>
-                    <div className='flex flex-col items-center gap-1'>
-                      <Icon className='size-11 max-md:size-8 rounded-sm border border-navy' />
-                      <span className='text-center text-[9px] font-bold leading-none max-md:text-[8px]'>
-                        {item.name}
+            <AnimatePresence initial={false}>
+              {lines.map((item) => {
+                const Icon = TILE_ICONS[item.icon];
+                return (
+                  <motion.tr
+                    key={item.id}
+                    layout
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.2, ease: 'easeInOut' }}
+                  >
+                    <td className='border border-navy p-1.5 max-md:p-1'>
+                      <div className='flex flex-col items-center gap-1'>
+                        <Icon className='size-11 max-md:size-8 rounded-sm border border-navy' />
+                        <span className='text-center text-[9px] font-bold leading-none max-md:text-[8px]'>
+                          {item.name}
+                        </span>
+                      </div>
+                    </td>
+                    <td className='border border-navy p-1.5 max-md:p-1'>
+                      <Icon className='mx-auto size-16 max-md:size-12' />
+                    </td>
+                    <td className='border border-navy p-1.5 max-md:p-1 text-center'>
+                      <span className='inline-block min-w-12 rounded-sm  py-1 text-xs font-bold whitespace-nowrap tabular-nums max-md:min-w-10 max-md:text-[11px]'>
+                        [ {item.quantity} ]
                       </span>
-                    </div>
-                  </td>
-                  <td className='border border-navy p-1.5 max-md:p-1'>
-                    <Icon className='mx-auto size-16 max-md:size-12' />
-                  </td>
-                  <td className='border border-navy p-1.5 max-md:p-1 text-center'>
-                    <span className='inline-block min-w-12 rounded-sm  py-1 text-xs font-bold whitespace-nowrap tabular-nums max-md:min-w-10 max-md:text-[11px]'>
-                      [ {item.quantity} ]
-                    </span>
-                  </td>
-                  <td className='border border-navy p-1.5 max-md:p-1 text-center'>
-                    <span className='inline-block min-w-14 rounded-sm  py-1 text-xs font-bold whitespace-nowrap tabular-nums max-md:min-w-12 max-md:text-[11px]'>
-                      [ {formatPrice(item.unitPrice)} ]
-                    </span>
-                  </td>
-                  <td className='border border-navy p-1.5 max-md:p-1'>
-                    <div className='flex items-start justify-center gap-2'>
-                      <span className='flex flex-col items-center gap-0.5'>
-                        <button
-                          type='button'
-                          onClick={() => dispatch(increaseQuantity(item.id))}
-                          className='flex size-6 cursor-pointer items-center justify-center rounded-sm bg-leaf transition hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy'
-                          aria-label={`Increase ${item.name} quantity`}
-                        >
-                          <PlusIcon className='size-3.5 text-cream' />
-                        </button>
-                        <span className='text-[8px] font-bold'>ADD</span>
+                    </td>
+                    <td className='border border-navy p-1.5 max-md:p-1 text-center'>
+                      <span className='inline-block min-w-14 rounded-sm  py-1 text-xs font-bold whitespace-nowrap tabular-nums max-md:min-w-12 max-md:text-[11px]'>
+                        [ {formatPrice(item.unitPrice)} ]
                       </span>
-                      <span className='flex flex-col items-center gap-0.5'>
-                        <button
-                          type='button'
-                          onClick={() => handleDecrease(item)}
-                          className='flex size-6 items-center justify-center rounded-sm bg-terracotta transition hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy cursor-pointer'
-                          aria-label={
-                            item.quantity <= SQUARE_FEET_STEP
-                              ? `Remove ${item.name} from cart`
-                              : `Decrease ${item.name} quantity`
-                          }
-                        >
-                          <TrashIcon className='size-3.5 text-cream' />
-                        </button>
-                        <span className='text-[8px] font-bold'>REMOVE</span>
-                      </span>
-                    </div>
-                  </td>
-                </tr>
-              );
-            })}
+                    </td>
+                    <td className='border border-navy p-1.5 max-md:p-1'>
+                      <div className='flex items-start justify-center gap-2'>
+                        <span className='flex flex-col items-center gap-0.5'>
+                          <button
+                            type='button'
+                            onClick={() => dispatch(increaseQuantity(item.id))}
+                            className='flex size-6 cursor-pointer items-center justify-center rounded-sm bg-leaf transition hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy'
+                            aria-label={`Increase ${item.name} quantity`}
+                          >
+                            <PlusIcon className='size-3.5 text-cream' />
+                          </button>
+                          <span className='text-[8px] font-bold'>ADD</span>
+                        </span>
+                        <span className='flex flex-col items-center gap-0.5'>
+                          <button
+                            type='button'
+                            onClick={() => handleDecrease(item)}
+                            className='flex size-6 items-center justify-center rounded-sm bg-terracotta transition hover:brightness-90 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-navy cursor-pointer'
+                            aria-label={
+                              item.quantity <= SQUARE_FEET_STEP
+                                ? `Remove ${item.name} from cart`
+                                : `Decrease ${item.name} quantity`
+                            }
+                          >
+                            <TrashIcon className='size-3.5 text-cream' />
+                          </button>
+                          <span className='text-[8px] font-bold'>REMOVE</span>
+                        </span>
+                      </div>
+                    </td>
+                  </motion.tr>
+                );
+              })}
+            </AnimatePresence>
           </tbody>
         </table>
       </div>

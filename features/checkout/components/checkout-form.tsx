@@ -1,5 +1,6 @@
 'use client';
 
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState, type FormEvent } from 'react';
 import { CustomerDetails } from './customer-details';
 import { PaymentMethods } from './payment-methods';
@@ -54,12 +55,19 @@ export function CheckoutForm() {
   if (isSuccess) {
     return (
       <div className='w-[320px] shrink-0 md:max-xl:w-full md:max-xl:max-w-150 md:max-xl:order-3 max-md:contents'>
-        <div className='rounded-sm border-2 border-navy bg-cream p-4 text-center'>
-          <h2 className='font-display text-lg'>ORDER PLACED</h2>
-          <p className='mt-2 text-[10px] font-bold'>
-            THANK YOU FOR YOUR ORDER. WE WILL CONTACT YOU SHORTLY.
-          </p>
-        </div>
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.25, ease: 'easeOut' }}
+            className='rounded-sm border-2 border-navy bg-cream p-4 text-center'
+          >
+            <h2 className='font-display text-lg'>ORDER PLACED</h2>
+            <p className='mt-2 text-[10px] font-bold'>
+              THANK YOU FOR YOUR ORDER. WE WILL CONTACT YOU SHORTLY.
+            </p>
+          </motion.div>
+        </AnimatePresence>
       </div>
     );
   }

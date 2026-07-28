@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 export function OrderSummarySectionHeader({ title }: { title: string }) {
   return (
     <div className='flex items-end  bg-cream'>
@@ -37,9 +39,19 @@ export function CustomerInputField({
           className='mb-0.5 h-3.5 min-w-0 flex-1 border-b border-navy bg-transparent focus-visible:border-b-2 focus-visible:outline-none'
         />
       </div>
-      {error && (
-        <p className='text-[9px] font-bold text-terracotta-dark'>{error}</p>
-      )}
+      <AnimatePresence>
+        {error && (
+          <motion.p
+            initial={{ opacity: 0, y: -4 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -4 }}
+            transition={{ duration: 0.15 }}
+            className='text-[9px] font-bold text-terracotta-dark'
+          >
+            {error}
+          </motion.p>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -89,7 +101,25 @@ export function PaymentMethodRadioButton({
         className='peer sr-only'
       />
       <span className='flex size-3.5 shrink-0 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy'>
-        <span className='hidden size-1.5 rounded-full bg-navy group-has-checked:block' />
+        {checked !== undefined ? (
+          <AnimatePresence>
+            {checked && (
+              <motion.span
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                transition={{
+                  type: 'spring',
+                  stiffness: 500,
+                  damping: 25,
+                }}
+                className='size-1.5 rounded-full bg-navy'
+              />
+            )}
+          </AnimatePresence>
+        ) : (
+          <span className='hidden size-1.5 rounded-full bg-navy group-has-checked:block' />
+        )}
       </span>
       {children}
     </label>
@@ -121,7 +151,17 @@ export function PaymentMethodCard({
         className='peer sr-only'
       />
       <span className='absolute left-2 top-2 flex size-3.5 shrink-0 items-center justify-center rounded-full border-2 border-navy peer-focus-visible:outline-2 peer-focus-visible:outline-offset-2 peer-focus-visible:outline-navy'>
-        <span className='hidden size-1.5 rounded-full bg-navy group-has-checked:block' />
+        <AnimatePresence>
+          {checked && (
+            <motion.span
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              transition={{ type: 'spring', stiffness: 500, damping: 25 }}
+              className='size-1.5 rounded-full bg-navy'
+            />
+          )}
+        </AnimatePresence>
       </span>
       {children}
     </label>
